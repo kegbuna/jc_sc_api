@@ -1,0 +1,21 @@
+{
+  "name": "jc_sc_api",
+  "version": "0.0.1",
+  "description": "A RESTful(-like) api for serving up Jersey City service calls",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "kegbuna@gmail.com",
+  "license": "ISC",
+  "dependencies": {
+    "log4js": "^1.1.1",
+    "pg": "^6.1.5",
+    "pg-hstore": "^2.3.2",
+    "restify": "^4.3.0",
+    "rxjs": "^5.2.0",
+    "sequelize": "^3.30.2"
+  },
+  "devDependencies": {
+  }
+}
