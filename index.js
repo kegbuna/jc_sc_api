@@ -1,7 +1,9 @@
 const restify = require('restify');
-const log4js = require('log4js');
 
-const initSequelize = require('./sequelize.init');
+const log4js = require('log4js');
+const logger = log4js.getLogger('Server');
+
+const models = require('./models');
 
 const serverConfig = require('./config/server.json');
 
@@ -9,16 +11,13 @@ const serverConfig = require('./config/server.json');
 const server = restify.createServer({
   name: serverConfig.name
 });
-const logger = log4js.getLogger('Server');
 
-server.get('/api/calls', (req, res) => {
-  logger.debug(`Received: ${req.toString()}`);
-  res.json(200, {
-    sup: 'hi'
-  });
-});
+server.use(restify.queryParser());
 
-initSequelize().subscribe((sequelize) => {
+const getCalls = require('./routes/calls/get.calls');
+server.get('/api/calls', getCalls);
+
+models.sequelize.sync().then(() => {
   server.listen(serverConfig.port, () => {
     logger.info(`${server.name} listening on ${serverConfig.port}`);
   });
