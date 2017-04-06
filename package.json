@@ -16,5 +16,7 @@
     "rxjs": "^5.2.0",
     "sequelize": "^3.30.2"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "gulp": "^3.9.1"
+  }
 }
