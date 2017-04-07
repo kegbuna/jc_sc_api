@@ -4,19 +4,32 @@ const serverConfig = require('../../config/server.json');
 const models = require('../../models');
 
 /**
- * Retrieves calls according to the
+ * Retrieves calls according to the provided parameters
  * @param {Request} req
- * @param {Response} res
+ * @param {string} req.params.district - Comma delimited list of district abbreviations
+ * @param {Date} req.params.time_received_start - The lower bound of the time received column
+ * @param {Date} req.params.time_received_end - The upper bound of the time received column
+ * @param {Date} req.params.time_dispatched_start - The lower bound of the time dispatched column
+ * @param {Date} req.params.time_dispatched_end - The upper bound of the time dispatched column
+ * @param {number} req.params.latitude_start - The lower bound of the latitude column
+ * @param {number} req.params.latitude_end - The upper bound of the latitude column
+ * @param {number} req.params.longitude_start - The lower bound of the longitude column
+ * @param {number} req.params.longitude_end - The upper bound of the longitude column
+ * @param {Response} res - The response object
  */
 function getCalls(req, res) {
 
-  let findAllParams = {
+  const initialParams = {
     limit: serverConfig.resultLimit,
     where: {}
   };
 
-  findAllParams = Object.keys(req.params).reduce((previousValue, currentValue, array) => {
+  const findAllParams = Object.keys(req.params).reduce((previousValue, currentValue) => {
     switch (currentValue) {
+      case 'district':
+        previousValue.where.district = previousValue.where.district || {};
+        previousValue.where.district = req.params[currentValue].split(',');
+        break;
       case 'time_received_start':
         previousValue.where.time_received = previousValue.where.time_received || {};
         previousValue.where.time_received.$gte = req.params[currentValue];
@@ -62,7 +75,7 @@ function getCalls(req, res) {
     }
 
     return previousValue;
-  }, findAllParams);
+  }, initialParams);
 
   models.service_calls
     .findAll(findAllParams)
