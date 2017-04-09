@@ -25,6 +25,7 @@ server.json
 {
   "name": "JCPD Service Call API",
   "port": 8080,
-  "resultLimit": 1000
+  "resultLimit": 1000, // hard limit on result set length
+  "baseUrl": "/api"
 }
 ```

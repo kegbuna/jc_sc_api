@@ -15,10 +15,10 @@ const server = restify.createServer({
 server.use(restify.queryParser());
 
 const getCalls = require('./routes/service_calls.js').get;
-server.get('/api/calls', getCalls);
+server.get(`${serverConfig.baseUrl}/calls`, getCalls);
 
 const getCallCodes = require('./routes/call_codes').get;
-server.get('/api/calls/codes', getCallCodes);
+server.get(`${serverConfig.baseUrl}/calls/codes`, getCallCodes);
 
 models.sequelize.sync().then(() => {
   server.listen(serverConfig.port, () => {
