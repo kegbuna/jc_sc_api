@@ -83,6 +83,22 @@ module.exports = function(sequelize, DataTypes) {
     updated: {
       type: DataTypes.TIME,
       allowNull: true
+    },
+    new_column: {
+      type: DataTypes.INTEGER,
+      allowNull: true
+    },
+    callcode_type: {
+      type: DataTypes.TEXT,
+      allowNull: true,
+      references: {
+        model: 'call_codes',
+        key: 'type'
+      }
+    },
+    callcode_pd_code: {
+      type: DataTypes.INTEGER,
+      allowNull: true
     }
   }, {
     tableName: 'service_calls',
