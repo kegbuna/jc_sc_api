@@ -4,7 +4,8 @@ module.exports = function(sequelize, DataTypes) {
   return sequelize.define('service_calls', {
     event_number: {
       type: DataTypes.TEXT,
-      allowNull: false
+      allowNull: false,
+      primaryKey: true
     },
     district: {
       type: DataTypes.TEXT,
@@ -44,7 +45,8 @@ module.exports = function(sequelize, DataTypes) {
     },
     unit_id: {
       type: DataTypes.TEXT,
-      allowNull: true
+      allowNull: true,
+      primaryKey: true
     },
     is_primary: {
       type: DataTypes.BOOLEAN,
