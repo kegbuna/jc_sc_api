@@ -84,10 +84,6 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.TIME,
       allowNull: true
     },
-    new_column: {
-      type: DataTypes.INTEGER,
-      allowNull: true
-    },
     callcode_type: {
       type: DataTypes.TEXT,
       allowNull: true,
