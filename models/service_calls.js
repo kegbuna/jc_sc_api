@@ -94,7 +94,11 @@ module.exports = function(sequelize, DataTypes) {
     },
     callcode_pd_code: {
       type: DataTypes.INTEGER,
-      allowNull: true
+      allowNull: true,
+      references: {
+        model: 'call_codes',
+        key: 'pd_code'
+      }
     }
   }, {
     tableName: 'service_calls',
