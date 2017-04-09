@@ -12,6 +12,7 @@ const server = restify.createServer({
   name: serverConfig.name
 });
 
+server.use(restify.CORS());
 server.use(restify.queryParser());
 
 const getCalls = require('./routes/service_calls.js').get;
