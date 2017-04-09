@@ -14,7 +14,7 @@ const server = restify.createServer({
 
 server.use(restify.queryParser());
 
-const getCalls = require('./routes/calls/get.calls');
+const getCalls = require('./routes/calls.js').get;
 server.get('/api/calls', getCalls);
 
 models.sequelize.sync().then(() => {

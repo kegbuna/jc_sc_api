@@ -1,11 +1,12 @@
 const log4js = require('log4js');
 const logger = log4js.getLogger('Get Service Calls');
-const serverConfig = require('../../config/server.json');
-const models = require('../../models');
+const serverConfig = require('../config/server.json');
+const models = require('../models/index');
 
 /**
  * Retrieves calls according to the provided parameters
  * @param {Request} req
+ * @param {string} req.params.callcode_type - Comma delimited list of district abbreviations
  * @param {string} req.params.district - Comma delimited list of district abbreviations
  * @param {Date} req.params.time_received_start - The lower bound of the time received column
  * @param {Date} req.params.time_received_end - The upper bound of the time received column
@@ -17,7 +18,7 @@ const models = require('../../models');
  * @param {number} req.params.longitude_end - The upper bound of the longitude column
  * @param {Response} res - The response object
  */
-function getCalls(req, res) {
+function get(req, res) {
 
   const initialParams = {
     limit: serverConfig.resultLimit,
@@ -86,4 +87,4 @@ function getCalls(req, res) {
   logger.debug(`Received: ${JSON.stringify(req.params)}`);
 }
 
-module.exports = getCalls;
+module.exports = {get};
