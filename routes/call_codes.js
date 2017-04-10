@@ -6,12 +6,14 @@ const models = require('../models/index');
 /**
  * Returns the entire set of call codes
  * @param {Request} req
+ * @param {Object} req.params - Hash of query parameters
+ * @param {string} req.params.limit - Max number of rows to return
  * @param {Response} res
  */
 function get(req, res) {
 
   const initialParams = {
-    limit: serverConfig.resultLimit,
+    limit: req.params.limit || serverConfig.resultLimit,
     where: {}
   };
 

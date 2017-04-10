@@ -6,8 +6,10 @@ const models = require('../models/index');
 /**
  * Retrieves calls according to the provided parameters
  * @param {Request} req
+ * @param {Object} req.params - Hash of query parameters
  * @param {string} req.params.callcode - Comma delimited list of call codes, i.e. E31
  * @param {string} req.params.district - Comma delimited list of district abbreviations
+ * @param {string} req.params.limit - Max number of rows to return
  * @param {Date} req.params.time_received_start - The lower bound of the time received column
  * @param {Date} req.params.time_received_end - The upper bound of the time received column
  * @param {Date} req.params.time_dispatched_start - The lower bound of the time dispatched column
@@ -22,7 +24,7 @@ const models = require('../models/index');
 function get(req, res) {
 
   const initialParams = {
-    limit: serverConfig.resultLimit,
+    limit: req.params.limit || serverConfig.resultLimit,
     where: {}
   };
 
